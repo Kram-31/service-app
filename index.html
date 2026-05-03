@@ -4,111 +4,125 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Service Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background-color: #1e2f8e;
+      font-family: 'Nunito', 'Segoe UI', sans-serif;
+      background: #1e3a8a;
       min-height: 100vh;
     }
 
     /* ── Navbar ── */
     .navbar {
-      background: white;
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 8px 20px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
-      position: relative;
-      z-index: 10;
+      padding: 0 20px;
+      height: 52px;
+      box-shadow: 0 1px 0 #e5e7eb;
     }
 
     .navbar-brand {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-weight: 700;
+      font-weight: 800;
       font-size: 15px;
-      color: #222;
+      color: #111;
       cursor: pointer;
+      text-decoration: none;
     }
 
     .logo-box {
-      width: 32px;
-      height: 32px;
+      width: 30px;
+      height: 30px;
       background: #1565c0;
-      border-radius: 8px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
 
     .navbar-nav {
       display: flex;
       align-items: center;
-      gap: 0;
     }
 
     .nav-link {
-      padding: 6px 12px;
+      padding: 0 12px;
+      height: 52px;
+      display: flex;
+      align-items: center;
       color: #555;
       font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
-      transition: color 0.15s;
+      border-bottom: 3px solid transparent;
+      transition: color .15s, border-color .15s;
       user-select: none;
       text-decoration: none;
     }
 
-    .nav-link:hover { color: #1565c0; }
-    .nav-link.active { color: #1565c0; font-weight: 600; }
+    .nav-link:hover            { color: #1565c0; }
+    .nav-link.active           { color: #1565c0; border-bottom-color: #1565c0; }
 
     /* Language toggle */
     .lang-toggle {
       display: flex;
       align-items: center;
-      border: 1.5px solid #ddd;
+      border: 1.5px solid #d1d5db;
       border-radius: 20px;
       overflow: hidden;
       margin: 0 10px;
     }
 
     .lang-btn {
-      padding: 3px 10px;
+      padding: 3px 11px;
       font-size: 12px;
       font-weight: 700;
+      font-family: 'Nunito', sans-serif;
       border: none;
       background: transparent;
       color: #888;
       cursor: pointer;
-      transition: background 0.15s, color 0.15s;
+      transition: background .15s, color .15s;
     }
 
-    .lang-btn.active { background: #1565c0; color: white; }
-    .lang-btn:not(.active):hover { background: #f5f5f5; }
+    .lang-btn.active              { background: #1565c0; color: #fff; }
+    .lang-btn:not(.active):hover  { background: #f3f4f6; }
 
     .btn-login {
-      padding: 6px 12px;
+      padding: 0 14px;
+      height: 52px;
       background: transparent;
       border: none;
       color: #555;
       font-size: 14px;
+      font-weight: 600;
+      font-family: 'Nunito', sans-serif;
       cursor: pointer;
     }
 
     .btn-signup {
       padding: 7px 18px;
       background: #1565c0;
-      color: white;
+      color: #fff;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 14px;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
       cursor: pointer;
-      font-weight: 500;
+      margin-left: 4px;
     }
 
-    .btn-signup:hover { background: #0d47a1; }
+    .btn-signup:hover { background: #1251a3; }
 
     /* ── Pages ── */
     .page { display: none; }
@@ -116,129 +130,168 @@
 
     /* ── Home ── */
     .home-wrap {
-      max-width: 440px;
-      margin: 30px auto;
-      padding: 0 16px 50px;
+      max-width: 430px;
+      margin: 28px auto 50px;
+      padding: 0 16px;
     }
 
     .hero {
       text-align: center;
-      color: white;
-      margin-bottom: 18px;
+      color: #fff;
+      margin-bottom: 16px;
     }
 
-    .hero-illustration { margin-bottom: 6px; }
+    .hero-fig { margin-bottom: 4px; }
 
-    .hero h1 { font-size: 20px; font-weight: 700; }
+    .hero h1 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
 
+    /* Main white card */
     .main-card {
-      background: white;
-      border-radius: 8px;
-      padding: 22px 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      background: #fff;
+      border-radius: 10px;
+      padding: 22px 20px 20px;
     }
 
     .main-card h2 {
       font-size: 17px;
-      font-weight: 700;
+      font-weight: 800;
       color: #1a237e;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
 
-    .card-subtitle {
+    .card-sub {
       font-size: 12px;
-      color: #666;
-      margin-bottom: 12px;
+      color: #6b7280;
+      font-weight: 600;
+      margin-bottom: 14px;
     }
 
     .main-card > p {
       font-size: 13px;
-      color: #444;
+      color: #374151;
       line-height: 1.65;
       margin-bottom: 10px;
+      font-weight: 400;
     }
 
-    /* Service rows */
-    .service-list { margin-top: 16px; display: flex; flex-direction: column; gap: 6px; }
+    /* ── Service items (home) ── */
+    .service-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 16px;
+    }
 
     .service-item {
       display: flex;
       align-items: center;
       justify-content: space-between;
       background: #e8eaf6;
-      border-radius: 6px;
-      padding: 12px 14px;
+      border-radius: 8px;
+      padding: 12px 14px 12px 12px;
       cursor: pointer;
-      transition: background 0.18s;
+      gap: 12px;
+      transition: background .15s;
     }
 
     .service-item:hover { background: #c5cae9; }
 
-    .service-body {
+    .service-left {
       display: flex;
-      flex-direction: column;
-      gap: 1px;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
     }
 
-    .service-emoji {
-      font-size: 22px;
-      margin-bottom: 5px;
+    .svc-icon-box {
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
     }
 
-    .service-info h3 {
-      font-size: 13px;
-      font-weight: 600;
+    .svc-text { min-width: 0; }
+
+    .svc-text h3 {
+      font-size: 13.5px;
+      font-weight: 700;
       color: #1a237e;
-      margin-bottom: 1px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .service-info p {
+    .svc-text p {
       font-size: 11.5px;
-      color: #555;
+      color: #6b7280;
+      font-weight: 400;
+      margin-top: 1px;
     }
 
-    .arrow { color: #aaa; font-size: 20px; font-weight: 300; margin-left: 8px; }
+    .arrow {
+      color: #9ca3af;
+      font-size: 20px;
+      font-weight: 300;
+      flex-shrink: 0;
+      line-height: 1;
+    }
 
-    /* Share */
+    /* Share button */
     .share-btn {
       display: block;
-      margin: 20px auto 0;
-      padding: 9px 32px;
+      margin: 18px auto 0;
+      padding: 9px 36px;
       background: #1a237e;
-      color: white;
+      color: #fff;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
       cursor: pointer;
-      letter-spacing: 0.3px;
+      letter-spacing: .3px;
     }
 
-    .share-btn:hover { background: #0d47a1; }
+    .share-btn:hover { background: #14197a; }
 
     /* Contact */
     .contact-section {
-      margin-top: 20px;
+      margin-top: 18px;
       padding-top: 14px;
-      border-top: 1px solid #eee;
+      border-top: 1px solid #e5e7eb;
     }
 
     .contact-section h3 {
       font-size: 15px;
-      font-weight: 700;
+      font-weight: 800;
       color: #1a237e;
       margin-bottom: 6px;
     }
 
     .contact-section p {
       font-size: 12.5px;
-      color: #555;
-      margin-bottom: 2px;
+      color: #6b7280;
+      font-weight: 400;
+      line-height: 1.6;
     }
 
-    .social-icons { display: flex; gap: 7px; margin-top: 10px; }
+    .social-row {
+      display: flex;
+      gap: 7px;
+      margin-top: 10px;
+    }
 
-    .s-icon {
+    .s-circle {
       width: 28px;
       height: 28px;
       background: #1565c0;
@@ -246,47 +299,45 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: white;
-      font-size: 12px;
-      font-weight: 700;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
       cursor: pointer;
     }
 
     /* ── Sub-pages ── */
     .sub-wrap {
-      max-width: 440px;
-      margin: 36px auto;
+      max-width: 430px;
+      margin: 32px auto;
       padding: 0 16px;
     }
 
     .sub-card {
-      background: white;
-      border-radius: 8px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      background: #fff;
+      border-radius: 10px;
+      padding: 6px;
     }
 
     .sub-item {
-      background: #c5cae9;
-      border-radius: 4px;
-      padding: 12px 14px;
+      background: #e8eaf6;
+      border-radius: 6px;
+      padding: 13px 16px;
       font-size: 14px;
+      font-weight: 600;
       color: #1a237e;
-      font-weight: 500;
       cursor: pointer;
-      transition: background 0.18s;
+      transition: background .15s;
+      margin-bottom: 3px;
     }
 
-    .sub-item:hover { background: #9fa8da; }
+    .sub-item:last-child { margin-bottom: 0; }
+    .sub-item:hover { background: #c5cae9; }
 
-    /* ── Contractor Form Page ── */
+    /* ── Contractor Form ── */
     .form-wrap {
       max-width: 560px;
-      margin: 30px auto;
-      padding: 0 16px 50px;
+      margin: 26px auto 50px;
+      padding: 0 16px;
     }
 
     .back-btn {
@@ -295,34 +346,34 @@
       gap: 6px;
       background: none;
       border: none;
-      color: white;
+      color: rgba(255,255,255,.85);
       font-size: 14px;
+      font-weight: 600;
+      font-family: 'Nunito', sans-serif;
       cursor: pointer;
-      margin-bottom: 14px;
-      opacity: 0.85;
+      margin-bottom: 12px;
       padding: 0;
     }
 
-    .back-btn:hover { opacity: 1; }
+    .back-btn:hover { color: #fff; }
 
     .form-card {
-      background: white;
-      border-radius: 8px;
-      padding: 28px 26px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      background: #fff;
+      border-radius: 10px;
+      padding: 28px 24px;
     }
 
     .form-card h2 {
       font-size: 18px;
-      font-weight: 700;
+      font-weight: 800;
       color: #1a237e;
       margin-bottom: 6px;
     }
 
     .form-desc {
       font-size: 13px;
-      color: #555;
-      line-height: 1.6;
+      color: #6b7280;
+      line-height: 1.65;
       margin-bottom: 22px;
     }
 
@@ -331,26 +382,26 @@
     .form-group label {
       display: block;
       font-size: 13px;
-      font-weight: 600;
-      color: #222;
+      font-weight: 700;
+      color: #111827;
       margin-bottom: 5px;
     }
 
-    .req { color: #e53935; margin-left: 2px; }
+    .req { color: #ef4444; margin-left: 2px; }
 
     .form-group input,
     .form-group select,
     .form-group textarea {
       width: 100%;
-      padding: 9px 11px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      padding: 9px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
       font-size: 13px;
-      color: #333;
+      font-family: 'Nunito', sans-serif;
+      color: #111827;
       outline: none;
-      font-family: inherit;
-      transition: border-color 0.15s;
-      background: white;
+      background: #fff;
+      transition: border-color .15s;
     }
 
     .form-group input:focus,
@@ -359,95 +410,73 @@
 
     .form-group textarea { min-height: 80px; resize: vertical; }
 
-    .form-hint {
-      font-size: 11.5px;
-      color: #e53935;
-      margin-top: 3px;
-    }
+    .form-hint      { font-size: 11.5px; color: #ef4444; margin-top: 3px; }
+    .form-hint.info { color: #9ca3af; }
 
-    .form-hint.info { color: #888; }
-
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
+    .two-col   { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .three-col { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 10px; margin-top: 8px; }
 
-    .check-group { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+    .check-group { display: flex; flex-direction: column; gap: 9px; margin-top: 5px; }
 
     .check-row {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       font-size: 13px;
-      color: #333;
+      font-weight: 600;
+      color: #374151;
       cursor: pointer;
     }
 
-    .check-row input[type="checkbox"],
-    .check-row input[type="radio"] {
-      width: auto;
-      padding: 0;
-      border: none;
-      accent-color: #1565c0;
-      cursor: pointer;
-    }
+    .check-row input { width: auto; padding: 0; border: none; accent-color: #1565c0; cursor: pointer; }
 
-    .form-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 24px;
-    }
+    .form-actions { display: flex; gap: 10px; margin-top: 26px; }
 
     .btn-save {
-      padding: 10px 22px;
-      background: white;
+      padding: 10px 24px;
+      background: #fff;
       border: 2px solid #1565c0;
       color: #1565c0;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
       cursor: pointer;
-      font-family: inherit;
     }
 
-    .btn-save:hover { background: #e8f0fe; }
+    .btn-save:hover { background: #eff6ff; }
 
     .btn-submit {
       flex: 1;
       padding: 10px;
       background: #1565c0;
-      color: white;
+      color: #fff;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
       cursor: pointer;
-      font-family: inherit;
     }
 
-    .btn-submit:hover { background: #0d47a1; }
+    .btn-submit:hover { background: #1251a3; }
 
     /* ── Modals ── */
-    .overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-    }
-
+    .overlay { display: none; position: fixed; inset: 0; z-index: 200; }
     .overlay.active { display: block; }
 
     .modal {
       position: absolute;
       top: 52px;
       right: 14px;
-      background: white;
+      background: #fff;
       border-radius: 10px;
       padding: 20px 18px;
       width: 320px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+      box-shadow: 0 8px 30px rgba(0,0,0,.2);
     }
 
-    /* Login social grid */
+    /* Social grid – login */
     .social-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -460,22 +489,25 @@
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      padding: 8px 4px;
-      border: 1px solid #e0e0e0;
+      padding: 8px 2px;
+      border: 1px solid #e5e7eb;
       border-radius: 8px;
-      background: white;
+      background: #fff;
       cursor: pointer;
       font-size: 10px;
-      color: #555;
-      transition: background 0.15s;
+      font-weight: 600;
+      color: #6b7280;
+      font-family: 'Nunito', sans-serif;
+      transition: background .15s;
     }
 
-    .social-pill:hover { background: #f5f5f5; }
+    .social-pill:hover { background: #f9fafb; }
 
     .divider {
       text-align: center;
-      color: #999;
+      color: #9ca3af;
       font-size: 13px;
+      font-weight: 700;
       margin: 12px 0;
       position: relative;
     }
@@ -486,29 +518,31 @@
       top: 50%;
       width: 38%;
       height: 1px;
-      background: #ddd;
+      background: #e5e7eb;
     }
 
     .divider::before { left: 0; }
-    .divider::after { right: 0; }
+    .divider::after  { right: 0; }
 
     .field { margin-bottom: 12px; }
 
     .field label {
       display: block;
       font-size: 13px;
-      color: #333;
+      font-weight: 600;
+      color: #374151;
       margin-bottom: 4px;
     }
 
     .field input {
       width: 100%;
-      padding: 9px 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+      padding: 9px 11px;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
       font-size: 13px;
+      font-family: 'Nunito', sans-serif;
       outline: none;
-      transition: border-color 0.15s;
+      transition: border-color .15s;
     }
 
     .field input:focus { border-color: #1565c0; }
@@ -517,9 +551,10 @@
       display: block;
       text-align: right;
       font-size: 12px;
-      color: #888;
+      font-weight: 600;
+      color: #9ca3af;
       cursor: pointer;
-      margin-top: -6px;
+      margin-top: -5px;
       margin-bottom: 14px;
     }
 
@@ -527,45 +562,46 @@
       width: 100%;
       padding: 11px;
       background: #1565c0;
-      color: white;
+      color: #fff;
       border: none;
-      border-radius: 5px;
+      border-radius: 6px;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
       cursor: pointer;
-      font-family: inherit;
     }
 
-    .btn-full:hover { background: #0d47a1; }
+    .btn-full:hover { background: #1251a3; }
 
     .modal-foot {
       text-align: center;
       margin-top: 12px;
       font-size: 13px;
-      color: #555;
+      font-weight: 600;
+      color: #6b7280;
     }
 
-    .modal-foot a { color: #1565c0; cursor: pointer; text-decoration: none; }
+    .modal-foot a { color: #1565c0; cursor: pointer; text-decoration: none; font-weight: 700; }
 
-    /* Sign up */
+    /* Sign-up buttons */
     .su-btn {
       display: flex;
       align-items: center;
       gap: 12px;
       width: 100%;
       padding: 12px 16px;
-      border-radius: 5px;
+      border-radius: 6px;
       border: none;
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 700;
+      font-family: 'Nunito', sans-serif;
       cursor: pointer;
       margin-bottom: 8px;
-      font-family: inherit;
     }
 
-    .su-google    { background: white; border: 1px solid #ddd; color: #333; }
-    .su-microsoft { background: #2b2b2b; color: white; }
-    .su-email     { background: #e05c28; color: white; }
+    .su-google    { background: #fff; border: 1.5px solid #e5e7eb; color: #111; }
+    .su-microsoft { background: #1f1f1f; color: #fff; }
+    .su-email     { background: #e05c28; color: #fff; }
   </style>
 </head>
 <body>
@@ -574,13 +610,13 @@
 <nav class="navbar">
   <div class="navbar-brand" onclick="showPage('home')">
     <div class="logo-box">
-      <!-- Wrench icon -->
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
       </svg>
     </div>
     Service Hub
   </div>
+
   <div class="navbar-nav">
     <span class="nav-link active" id="nav-home"        onclick="showPage('home')"        data-i18n="nav_home"></span>
     <span class="nav-link"        id="nav-auto"        onclick="showPage('auto')"        data-i18n="nav_auto"></span>
@@ -598,32 +634,34 @@
   </div>
 </nav>
 
-<!-- ── Page : Accueil ── -->
+<!-- ══════════ HOME ══════════ -->
 <div id="page-home" class="page active">
   <div class="home-wrap">
 
     <div class="hero">
-      <div class="hero-illustration">
-        <!-- Service Hub illustration -->
-        <svg width="72" height="80" viewBox="0 0 72 80" xmlns="http://www.w3.org/2000/svg">
-          <!-- Hard hat -->
-          <ellipse cx="36" cy="26" rx="22" ry="7" fill="#FFA726"/>
-          <rect x="14" y="22" width="44" height="8" rx="3" fill="#FB8C00"/>
-          <!-- Head -->
-          <circle cx="36" cy="42" r="15" fill="#fff" opacity="0.95"/>
-          <!-- Eyes -->
-          <circle cx="30" cy="40" r="2.2" fill="#1a237e"/>
-          <circle cx="42" cy="40" r="2.2" fill="#1a237e"/>
-          <!-- Smile -->
-          <path d="M30 46 Q36 51 42 46" stroke="#1a237e" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <!-- Body uniform -->
-          <path d="M14 80 Q14 58 36 58 Q58 58 58 80 Z" fill="#1565c0" opacity="0.9"/>
-          <!-- Collar white -->
-          <path d="M29 58 L36 66 L43 58" fill="white" opacity="0.6"/>
-          <!-- Wrench (right hand) -->
-          <g transform="translate(50,52) rotate(-30)">
-            <rect x="-3" y="-2" width="6" height="18" rx="2" fill="white" opacity="0.85"/>
-            <rect x="-6" y="-2" width="12" height="6" rx="2" fill="white" opacity="0.85"/>
+      <div class="hero-fig">
+        <!-- Jotform-style service worker illustration -->
+        <svg width="70" height="78" viewBox="0 0 70 78" xmlns="http://www.w3.org/2000/svg">
+          <!-- hard hat -->
+          <ellipse cx="35" cy="24" rx="21" ry="7" fill="#FFA726"/>
+          <rect x="14" y="20" width="42" height="8" rx="3" fill="#FB8C00"/>
+          <!-- brim shadow line -->
+          <rect x="12" y="26" width="46" height="2" rx="1" fill="#F57C00" opacity=".5"/>
+          <!-- head -->
+          <circle cx="35" cy="40" r="14" fill="#fff" opacity=".96"/>
+          <!-- eyes -->
+          <circle cx="29.5" cy="38.5" r="2" fill="#1a237e"/>
+          <circle cx="40.5" cy="38.5" r="2" fill="#1a237e"/>
+          <!-- smile -->
+          <path d="M29 44 Q35 49 41 44" stroke="#1a237e" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+          <!-- body / uniform -->
+          <path d="M13 78 Q13 57 35 57 Q57 57 57 78 Z" fill="#1565c0"/>
+          <!-- collar -->
+          <path d="M28 57 L35 64 L42 57" fill="#fff" opacity=".55"/>
+          <!-- wrench (right) -->
+          <g transform="translate(50,50) rotate(-25)">
+            <rect x="-2.5" y="-2" width="5" height="16" rx="2" fill="#fff" opacity=".8"/>
+            <rect x="-5.5" y="-2" width="11" height="5.5" rx="2" fill="#fff" opacity=".8"/>
           </g>
         </svg>
       </div>
@@ -632,15 +670,16 @@
 
     <div class="main-card">
       <h2 data-i18n="home_title"></h2>
-      <p class="card-subtitle" data-i18n="home_subtitle"></p>
+      <p class="card-sub" data-i18n="home_subtitle"></p>
       <p data-i18n="home_p1"></p>
       <p data-i18n="home_p2"></p>
 
       <div class="service-list">
+
         <div class="service-item" onclick="showPage('auto')">
-          <div class="service-body">
-            <span class="service-emoji">🚗</span>
-            <div class="service-info">
+          <div class="service-left">
+            <div class="svc-icon-box">🚗</div>
+            <div class="svc-text">
               <h3 data-i18n="svc_auto_title"></h3>
               <p  data-i18n="svc_auto_desc"></p>
             </div>
@@ -649,9 +688,9 @@
         </div>
 
         <div class="service-item" onclick="showPage('maintenance')">
-          <div class="service-body">
-            <span class="service-emoji">🏠</span>
-            <div class="service-info">
+          <div class="service-left">
+            <div class="svc-icon-box">🏠</div>
+            <div class="svc-text">
               <h3 data-i18n="svc_maint_title"></h3>
               <p  data-i18n="svc_maint_desc"></p>
             </div>
@@ -660,9 +699,9 @@
         </div>
 
         <div class="service-item" onclick="showPage('pets')">
-          <div class="service-body">
-            <span class="service-emoji">🐾</span>
-            <div class="service-info">
+          <div class="service-left">
+            <div class="svc-icon-box">🐾</div>
+            <div class="svc-text">
               <h3 data-i18n="svc_pets_title"></h3>
               <p  data-i18n="svc_pets_desc"></p>
             </div>
@@ -671,37 +710,38 @@
         </div>
 
         <div class="service-item" onclick="showPage('earn')">
-          <div class="service-body">
-            <span class="service-emoji">💼</span>
-            <div class="service-info">
+          <div class="service-left">
+            <div class="svc-icon-box">💼</div>
+            <div class="svc-text">
               <h3 data-i18n="svc_earn_title"></h3>
               <p  data-i18n="svc_earn_desc"></p>
             </div>
           </div>
           <span class="arrow">›</span>
         </div>
-      </div>
+
+      </div><!-- /service-list -->
 
       <button class="share-btn" data-i18n="share_btn"></button>
 
       <div class="contact-section">
         <h3 data-i18n="contact_title"></h3>
-        <p  data-i18n="contact_business"></p>
-        <p  data-i18n="contact_email"></p>
-        <p  data-i18n="contact_location"></p>
-        <div class="social-icons">
-          <div class="s-icon" title="YouTube">▶</div>
-          <div class="s-icon" title="Twitter">𝕏</div>
-          <div class="s-icon" title="LinkedIn">in</div>
-          <div class="s-icon" title="Facebook">f</div>
-          <div class="s-icon" title="Instagram">◎</div>
+        <p data-i18n="contact_business"></p>
+        <p data-i18n="contact_email_lbl"></p>
+        <p data-i18n="contact_location"></p>
+        <div class="social-row">
+          <div class="s-circle" title="YouTube">▶</div>
+          <div class="s-circle" title="Twitter">𝕏</div>
+          <div class="s-circle" title="LinkedIn" style="font-size:9px">in</div>
+          <div class="s-circle" title="Facebook">f</div>
+          <div class="s-circle" title="Instagram">◎</div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ── Page : Auto ── -->
+<!-- ══════════ AUTO ══════════ -->
 <div id="page-auto" class="page">
   <div class="sub-wrap">
     <div class="sub-card">
@@ -712,7 +752,7 @@
   </div>
 </div>
 
-<!-- ── Page : Entretien ── -->
+<!-- ══════════ MAINTENANCE ══════════ -->
 <div id="page-maintenance" class="page">
   <div class="sub-wrap">
     <div class="sub-card">
@@ -724,7 +764,7 @@
   </div>
 </div>
 
-<!-- ── Page : Animaux ── -->
+<!-- ══════════ PETS ══════════ -->
 <div id="page-pets" class="page">
   <div class="sub-wrap">
     <div class="sub-card">
@@ -733,7 +773,7 @@
   </div>
 </div>
 
-<!-- ── Page : Gagner ── -->
+<!-- ══════════ EARN ══════════ -->
 <div id="page-earn" class="page">
   <div class="sub-wrap">
     <div class="sub-card">
@@ -742,24 +782,21 @@
   </div>
 </div>
 
-<!-- ── Page : Formulaire Prestataire ── -->
+<!-- ══════════ CONTRACTOR FORM ══════════ -->
 <div id="page-contractor-form" class="page">
   <div class="form-wrap">
     <button class="back-btn" onclick="showPage('earn')">
       ← <span data-i18n="form_back"></span>
     </button>
-
     <div class="form-card">
       <h2 data-i18n="earn_1"></h2>
       <p class="form-desc" data-i18n="form_desc"></p>
 
-      <!-- Business Name -->
       <div class="form-group">
         <label><span data-i18n="form_business"></span><span class="req">*</span></label>
         <input type="text" id="f-business">
       </div>
 
-      <!-- Contact Name -->
       <div class="form-group">
         <label><span data-i18n="form_contact"></span><span class="req">*</span></label>
         <div class="two-col">
@@ -768,25 +805,22 @@
         </div>
       </div>
 
-      <!-- Phone -->
       <div class="form-group">
         <label><span data-i18n="form_phone"></span><span class="req">*</span></label>
         <input type="tel" id="f-phone" data-i18n-ph="form_phone_ph">
-        <p class="form-hint" data-i18n="form_phone_hint"></p>
+        <p class="form-hint"      data-i18n="form_phone_hint"></p>
         <p class="form-hint info" data-i18n="form_phone_format"></p>
       </div>
 
-      <!-- Email -->
       <div class="form-group">
         <label><span data-i18n="form_email"></span><span class="req">*</span></label>
         <input type="email" id="f-email" data-i18n-ph="form_email_ph">
       </div>
 
-      <!-- Address -->
       <div class="form-group">
         <label><span data-i18n="form_address"></span><span class="req">*</span></label>
-        <input type="text" id="f-street1" data-i18n-ph="form_street1" style="margin-bottom:6px">
-        <input type="text" id="f-street2" data-i18n-ph="form_street2" style="margin-bottom:6px">
+        <input type="text" id="f-street1" data-i18n-ph="form_street1" style="margin-bottom:7px">
+        <input type="text" id="f-street2" data-i18n-ph="form_street2" style="margin-bottom:7px">
         <div class="three-col">
           <input type="text" id="f-city"   data-i18n-ph="form_city">
           <input type="text" id="f-state"  data-i18n-ph="form_state">
@@ -794,58 +828,51 @@
         </div>
       </div>
 
-      <!-- Services -->
       <div class="form-group">
         <label><span data-i18n="form_services"></span><span class="req">*</span></label>
         <div class="check-group">
-          <label class="check-row"><input type="checkbox" value="auto"><span data-i18n="svc_auto_title"></span></label>
-          <label class="check-row"><input type="checkbox" value="home"><span data-i18n="svc_maint_title"></span></label>
-          <label class="check-row"><input type="checkbox" value="pets"><span data-i18n="svc_pets_title"></span></label>
-          <label class="check-row"><input type="checkbox" value="other"><span data-i18n="form_other"></span></label>
+          <label class="check-row"><input type="checkbox"><span data-i18n="svc_auto_title"></span></label>
+          <label class="check-row"><input type="checkbox"><span data-i18n="svc_maint_title"></span></label>
+          <label class="check-row"><input type="checkbox"><span data-i18n="svc_pets_title"></span></label>
+          <label class="check-row"><input type="checkbox"><span data-i18n="form_other"></span></label>
         </div>
       </div>
 
-      <!-- Years of experience -->
       <div class="form-group">
         <label><span data-i18n="form_years"></span><span class="req">*</span></label>
         <input type="number" id="f-years" data-i18n-ph="form_years_ph" min="0" max="70">
       </div>
 
-      <!-- License -->
       <div class="form-group">
         <label data-i18n="form_license"></label>
         <input type="text" id="f-license">
       </div>
 
-      <!-- Insurance -->
       <div class="form-group">
         <label><span data-i18n="form_insurance"></span><span class="req">*</span></label>
         <div class="check-group">
-          <label class="check-row"><input type="radio" name="insurance" value="insured"><span data-i18n="form_ins_yes"></span></label>
-          <label class="check-row"><input type="radio" name="insurance" value="not"><span data-i18n="form_ins_no"></span></label>
-          <label class="check-row"><input type="radio" name="insurance" value="self"><span data-i18n="form_ins_self"></span></label>
+          <label class="check-row"><input type="radio" name="insurance"><span data-i18n="form_ins_yes"></span></label>
+          <label class="check-row"><input type="radio" name="insurance"><span data-i18n="form_ins_no"></span></label>
+          <label class="check-row"><input type="radio" name="insurance"><span data-i18n="form_ins_self"></span></label>
         </div>
       </div>
 
-      <!-- Service Areas -->
       <div class="form-group">
         <label><span data-i18n="form_areas"></span><span class="req">*</span></label>
         <textarea id="f-areas"></textarea>
       </div>
 
-      <!-- Availability -->
       <div class="form-group">
         <label><span data-i18n="form_availability"></span><span class="req">*</span></label>
         <div class="check-group">
-          <label class="check-row"><input type="checkbox" value="weekdays"><span data-i18n="form_avail_week"></span></label>
-          <label class="check-row"><input type="checkbox" value="weekends"><span data-i18n="form_avail_we"></span></label>
-          <label class="check-row"><input type="checkbox" value="mornings"><span data-i18n="form_avail_am"></span></label>
-          <label class="check-row"><input type="checkbox" value="afternoons"><span data-i18n="form_avail_pm"></span></label>
-          <label class="check-row"><input type="checkbox" value="evenings"><span data-i18n="form_avail_eve"></span></label>
+          <label class="check-row"><input type="checkbox"><span data-i18n="form_avail_week"></span></label>
+          <label class="check-row"><input type="checkbox"><span data-i18n="form_avail_we"></span></label>
+          <label class="check-row"><input type="checkbox"><span data-i18n="form_avail_am"></span></label>
+          <label class="check-row"><input type="checkbox"><span data-i18n="form_avail_pm"></span></label>
+          <label class="check-row"><input type="checkbox"><span data-i18n="form_avail_eve"></span></label>
         </div>
       </div>
 
-      <!-- Notes -->
       <div class="form-group">
         <label data-i18n="form_notes"></label>
         <textarea id="f-notes"></textarea>
@@ -859,31 +886,26 @@
   </div>
 </div>
 
-<!-- ── Modal : Connexion ── -->
+<!-- ══════════ MODAL LOGIN ══════════ -->
 <div id="overlay-login" class="overlay" onclick="bgClose(event,'login')">
   <div class="modal" onclick="event.stopPropagation()">
     <div class="social-grid">
-      <!-- Google -->
       <button class="social-pill">
         <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
         Google
       </button>
-      <!-- Microsoft -->
       <button class="social-pill">
         <svg width="20" height="20" viewBox="0 0 21 21"><rect width="10" height="10" fill="#F25022"/><rect x="11" width="10" height="10" fill="#7FBA00"/><rect y="11" width="10" height="10" fill="#00A4EF"/><rect x="11" y="11" width="10" height="10" fill="#FFB900"/></svg>
         Microsoft
       </button>
-      <!-- Facebook -->
       <button class="social-pill">
-        <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path d="M16.67 15.5l.44-2.87h-2.75v-1.86c0-.79.39-1.55 1.63-1.55h1.26V6.77s-1.14-.2-2.23-.2c-2.28 0-3.77 1.38-3.77 3.88v2.18H8.5v2.87h2.75V22.9A10 10 0 0 0 12 23a10 10 0 0 0 1.63-.13V15.5h2.04z" fill="white"/></svg>
+        <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path d="M16.67 15.5l.44-2.87h-2.75v-1.86c0-.79.39-1.55 1.63-1.55h1.26V6.77s-1.14-.2-2.23-.2c-2.28 0-3.77 1.38-3.77 3.88v2.18H8.5v2.87h2.75V22.9A10.07 10.07 0 0 0 12 23c.55 0 1.09-.04 1.63-.1V15.5h2.04z" fill="#fff"/></svg>
         Facebook
       </button>
-      <!-- Apple -->
       <button class="social-pill">
         <svg width="20" height="20" viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.19 1.28-2.17 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.37 2.77M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" fill="#000"/></svg>
         Apple
       </button>
-      <!-- Salesforce -->
       <button class="social-pill">
         <svg width="20" height="20" viewBox="0 0 24 24"><path d="M10 3c-1.43 0-2.8.5-3.86 1.38A5.5 5.5 0 0 0 2 10c0 .78.16 1.52.45 2.2A4 4 0 0 0 4 19h14a4 4 0 0 0 1.07-7.84A5.5 5.5 0 0 0 14 7a5.5 5.5 0 0 0-4-4z" fill="#00A1E0"/></svg>
         Salesforce
@@ -900,11 +922,8 @@
       <label data-i18n="login_pw_label"></label>
       <input type="password" autocomplete="current-password">
     </div>
-
     <a class="forgot" data-i18n="login_forgot"></a>
-
     <button class="btn-full" data-i18n="login_btn"></button>
-
     <div class="modal-foot">
       <span data-i18n="login_no_account"></span>
       <a onclick="switchModal('login','signup')" data-i18n="nav_signup"></a>
@@ -912,7 +931,7 @@
   </div>
 </div>
 
-<!-- ── Modal : S'inscrire ── -->
+<!-- ══════════ MODAL SIGNUP ══════════ -->
 <div id="overlay-signup" class="overlay" onclick="bgClose(event,'signup')">
   <div class="modal" onclick="event.stopPropagation()">
     <button class="su-btn su-google">
@@ -923,14 +942,11 @@
       <svg width="18" height="18" viewBox="0 0 21 21"><rect width="10" height="10" fill="#F25022"/><rect x="11" width="10" height="10" fill="#7FBA00"/><rect y="11" width="10" height="10" fill="#00A4EF"/><rect x="11" y="11" width="10" height="10" fill="#FFB900"/></svg>
       <span data-i18n="signup_microsoft"></span>
     </button>
-
     <div class="divider" data-i18n="or"></div>
-
     <button class="su-btn su-email">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
       <span data-i18n="signup_email"></span>
     </button>
-
     <div class="modal-foot" style="margin-top:16px">
       <span data-i18n="signup_have_account"></span>
       <a onclick="switchModal('signup','login')" data-i18n="login_btn"></a>
@@ -939,183 +955,170 @@
 </div>
 
 <script>
-  /* ── Translations ── */
-  const translations = {
-    fr: {
-      nav_home: 'Accueil', nav_auto: 'Auto', nav_maintenance: 'Entretien',
-      nav_pets: 'Animaux', nav_earn: 'Gagner',
-      nav_login: 'Connexion', nav_signup: "S'inscrire",
+const T = {
+  fr: {
+    nav_home:'Accueil', nav_auto:'Auto', nav_maintenance:'Entretien',
+    nav_pets:'Animaux', nav_earn:'Gagner',
+    nav_login:'Connexion', nav_signup:"S'inscrire",
 
-      home_title:    'Bienvenue sur Service Hub',
-      home_subtitle: 'Accédez à plusieurs services et gérez tout en un seul endroit.',
-      home_p1: "Service Hub est une application polyvalente qui propose plusieurs services à la demande, chacun accessible via des onglets séparés pour une navigation facile. Les utilisateurs peuvent sélectionner le service souhaité et soumettre leurs demandes facilement via un formulaire dédié.",
-      home_p2: "En plus de servir les utilisateurs, Service Hub accueille de nouveaux prestataires souhaitant rejoindre la plateforme. Les prestataires intéressés peuvent postuler via un formulaire d'inscription dédié, élargissant ainsi la gamme de services disponibles.",
+    home_title:'Bienvenue sur Service Hub',
+    home_subtitle:'Accédez à plusieurs services et gérez tout en un seul endroit.',
+    home_p1:"Service Hub est une application polyvalente qui propose plusieurs services à la demande, chacun accessible via des onglets séparés pour une navigation facile. Les utilisateurs peuvent sélectionner le service souhaité et soumettre leurs demandes facilement via un formulaire dédié.",
+    home_p2:"En plus de servir les utilisateurs, Service Hub accueille de nouveaux prestataires souhaitant rejoindre la plateforme. Les prestataires intéressés peuvent postuler via un formulaire d'inscription dédié, élargissant ainsi la gamme de services disponibles.",
 
-      svc_auto_title:  'Services Automobiles',
-      svc_auto_desc:   'Sélectionnez le service souhaité et fournissez les détails du véhicule pour une aide rapide.',
-      svc_maint_title: 'Rénovation et Entretien de Maison',
-      svc_maint_desc:  'Améliorez votre maison.',
-      svc_pets_title:  'Services pour Animaux',
-      svc_pets_desc:   'Soumettez une demande pour notre service de soins aux animaux.',
-      svc_earn_title:  'Gagnez Avec Nous',
-      svc_earn_desc:   'Rejoignez notre équipe en tant que Prestataire de Services.',
+    svc_auto_title:'Services Automobiles',
+    svc_auto_desc:'Sélectionnez le service souhaité et fournissez les détails du véhicule pour une aide rapide.',
+    svc_maint_title:'Rénovation et Entretien de Maison',
+    svc_maint_desc:'Améliorez votre maison.',
+    svc_pets_title:'Services pour Animaux',
+    svc_pets_desc:'Soumettez une demande pour notre service de soins aux animaux.',
+    svc_earn_title:'Gagnez Avec Nous',
+    svc_earn_desc:'Rejoignez notre équipe en tant que Prestataire de Services.',
 
-      share_btn: 'Partager Cette Application',
-      contact_title: 'Contactez-Nous', contact_business: "Nom de l'entreprise",
-      contact_email: 'Email', contact_location: 'Emplacement',
+    share_btn:'Partager Cette Application',
+    contact_title:'Contactez-Nous',
+    contact_business:"Nom de l'entreprise",
+    contact_email_lbl:'Email',
+    contact_location:'Emplacement',
 
-      auto_1: 'Assistance Routière 🚗', auto_2: 'Mécanicien Mobile', auto_3: 'Nettoyage Auto Mobile',
-      maint_1: 'Plomberie', maint_2: 'Électricité', maint_3: 'Peinture et Décoration', maint_4: 'Jardinage',
-      pets_1: 'Services Animaliers 🐾',
-      earn_1: 'Formulaire pour Prestataires de Services',
+    auto_1:'Assistance Routière 🚗', auto_2:'Mécanicien Mobile', auto_3:'Nettoyage Auto Mobile',
+    maint_1:'Plomberie', maint_2:'Électricité', maint_3:'Peinture et Décoration', maint_4:'Jardinage',
+    pets_1:'Services Animaliers 🐾',
+    earn_1:'Formulaire pour Prestataires de Services',
 
-      or: 'OU',
-      login_email_label: "Adresse email ou nom d'utilisateur",
-      login_pw_label: 'Mot de passe', login_forgot: 'Mot de passe oublié ?',
-      login_btn: 'Se connecter', login_no_account: 'Pas de compte ? ',
-      signup_google: "S'inscrire avec Google", signup_microsoft: "S'inscrire avec Microsoft",
-      signup_email: "S'inscrire avec Email", signup_have_account: 'Déjà un compte ? ',
+    or:'OU',
+    login_email_label:"Adresse email ou nom d'utilisateur",
+    login_pw_label:'Mot de passe',
+    login_forgot:'Mot de passe oublié ?',
+    login_btn:'Se connecter',
+    login_no_account:'Pas de compte ? ',
+    signup_google:"S'inscrire avec Google",
+    signup_microsoft:"S'inscrire avec Microsoft",
+    signup_email:"S'inscrire avec Email",
+    signup_have_account:'Déjà un compte ? ',
 
-      // Form
-      form_back: 'Retour',
-      form_desc: "Rejoignez notre réseau en remplissant ce formulaire pour recevoir des demandes de service et des devis de clients locaux.",
-      form_business: "Nom de l'entreprise",
-      form_contact: 'Nom du contact',
-      form_first: 'Prénom', form_last: 'Nom de famille',
-      form_phone: 'Numéro de téléphone',
-      form_phone_ph: '(000) 000-0000',
-      form_phone_hint: 'Veuillez entrer un numéro de téléphone valide.',
-      form_phone_format: 'Format : (000) 000-0000.',
-      form_email: 'Adresse email', form_email_ph: 'exemple@exemple.com',
-      form_address: "Adresse de l'entreprise",
-      form_street1: 'Adresse', form_street2: 'Adresse (ligne 2)',
-      form_city: 'Ville', form_state: 'Province', form_postal: 'Code postal',
-      form_services: 'Services offerts',
-      form_other: 'Autre',
-      form_years: "Années d'expérience", form_years_ph: 'ex. : 5',
-      form_license: 'Numéro de licence (si applicable)',
-      form_insurance: "Statut d'assurance",
-      form_ins_yes: 'Assuré(e)', form_ins_no: 'Non assuré(e)', form_ins_self: 'Auto-assuré(e)',
-      form_areas: 'Zones de service (villes ou codes postaux)',
-      form_availability: 'Disponibilité',
-      form_avail_week: 'Semaine (Lun–Ven)', form_avail_we: 'Week-ends',
-      form_avail_am: 'Matins', form_avail_pm: 'Après-midis', form_avail_eve: 'Soirées',
-      form_notes: 'Notes ou qualifications supplémentaires',
-      form_save: 'Sauvegarder', form_submit: 'Soumettre la candidature',
-    },
-    en: {
-      nav_home: 'Home', nav_auto: 'Auto', nav_maintenance: 'Maintenance',
-      nav_pets: 'Pets', nav_earn: 'Earn',
-      nav_login: 'Login', nav_signup: 'Sign Up',
+    form_back:'Retour',
+    form_desc:"Rejoignez notre réseau en remplissant ce formulaire pour recevoir des demandes de service et des devis de clients locaux.",
+    form_business:"Nom de l'entreprise",
+    form_contact:'Nom du contact',
+    form_first:'Prénom', form_last:'Nom de famille',
+    form_phone:'Numéro de téléphone', form_phone_ph:'(000) 000-0000',
+    form_phone_hint:'Veuillez entrer un numéro de téléphone valide.',
+    form_phone_format:'Format : (000) 000-0000.',
+    form_email:'Adresse email', form_email_ph:'exemple@exemple.com',
+    form_address:"Adresse de l'entreprise",
+    form_street1:'Adresse', form_street2:'Adresse (ligne 2)',
+    form_city:'Ville', form_state:'Province', form_postal:'Code postal',
+    form_services:'Services offerts', form_other:'Autre',
+    form_years:"Années d'expérience", form_years_ph:'ex. : 5',
+    form_license:'Numéro de licence (si applicable)',
+    form_insurance:"Statut d'assurance",
+    form_ins_yes:'Assuré(e)', form_ins_no:'Non assuré(e)', form_ins_self:'Auto-assuré(e)',
+    form_areas:'Zones de service (villes ou codes postaux)',
+    form_availability:'Disponibilité',
+    form_avail_week:'Semaine (Lun–Ven)', form_avail_we:'Week-ends',
+    form_avail_am:'Matins', form_avail_pm:'Après-midis', form_avail_eve:'Soirées',
+    form_notes:'Notes ou qualifications supplémentaires',
+    form_save:'Sauvegarder', form_submit:'Soumettre la candidature',
+  },
+  en: {
+    nav_home:'Home', nav_auto:'Auto', nav_maintenance:'Maintenance',
+    nav_pets:'Pets', nav_earn:'Earn',
+    nav_login:'Login', nav_signup:'Sign Up',
 
-      home_title: 'Welcome to Service Hub',
-      home_subtitle: 'Access multiple services and manage everything in one place.',
-      home_p1: 'Service Hub is a versatile app that provides multiple on-demand services, each accessible through separate tabs for easy navigation. Users can select the specific service they require and submit their requests conveniently via a dedicated form.',
-      home_p2: 'In addition to serving users, Service Hub welcomes new providers who wish to join the platform. Interested providers can apply through a dedicated signup tab, expanding the range of services available to users.',
+    home_title:'Welcome to Service Hub',
+    home_subtitle:'Access multiple services and manage everything in one place.',
+    home_p1:'Service Hub is a versatile app that provides multiple on-demand services, each accessible through separate tabs for easy navigation. Users can select the specific service they require and submit their requests conveniently via a dedicated form.',
+    home_p2:'In addition to serving users, Service Hub welcomes new providers who wish to join the platform. Interested providers can apply through a dedicated signup tab, expanding the range of services available to users.',
 
-      svc_auto_title:  'Automotive Services',
-      svc_auto_desc:   'Select your needed service and provide vehicle details to get quick help.',
-      svc_maint_title: 'Home Improvement and Maintenance',
-      svc_maint_desc:  'Make house better.',
-      svc_pets_title:  'Pet and Animal Services',
-      svc_pets_desc:   'Submit a request for our Pet care service.',
-      svc_earn_title:  'Earn With Us',
-      svc_earn_desc:   'Join our team as a Service Provider.',
+    svc_auto_title:'Automotive Services',
+    svc_auto_desc:'Select your needed service and provide vehicle details to get quick help.',
+    svc_maint_title:'Home Improvement and Maintenance',
+    svc_maint_desc:'Make house better.',
+    svc_pets_title:'Pet and Animal Services',
+    svc_pets_desc:'Submit a request for our Pet care service.',
+    svc_earn_title:'Earn With Us',
+    svc_earn_desc:'Join our team as a Service Provider.',
 
-      share_btn: 'Share This App',
-      contact_title: 'Contact Us', contact_business: 'Business Name',
-      contact_email: 'Email', contact_location: 'Location',
+    share_btn:'Share This App',
+    contact_title:'Contact Us',
+    contact_business:'Business Name',
+    contact_email_lbl:'Email',
+    contact_location:'Location',
 
-      auto_1: 'Roadside Assistance 🚗', auto_2: 'Mobile Mechanic', auto_3: 'Mobile Auto Detailing',
-      maint_1: 'Plumbing', maint_2: 'Electrical', maint_3: 'Painting & Decoration', maint_4: 'Gardening',
-      pets_1: 'Pet Services 🐾',
-      earn_1: 'Contractor / Service Provider Intake',
+    auto_1:'Roadside Assistance 🚗', auto_2:'Mobile Mechanic', auto_3:'Mobile Auto Detailing',
+    maint_1:'Plumbing', maint_2:'Electrical', maint_3:'Painting & Decoration', maint_4:'Gardening',
+    pets_1:'Pet Services 🐾',
+    earn_1:'Contractor / Service Provider Intake',
 
-      or: 'OR',
-      login_email_label: 'Email address or username',
-      login_pw_label: 'Password', login_forgot: 'Forgot password?',
-      login_btn: 'Log in', login_no_account: "Don't have an account? ",
-      signup_google: 'Sign up with Google', signup_microsoft: 'Sign up with Microsoft',
-      signup_email: 'Sign up with Email', signup_have_account: 'Already have an account? ',
+    or:'OR',
+    login_email_label:'Email address or username',
+    login_pw_label:'Password',
+    login_forgot:'Forgot password?',
+    login_btn:'Log in',
+    login_no_account:"Don't have an account? ",
+    signup_google:'Sign up with Google',
+    signup_microsoft:'Sign up with Microsoft',
+    signup_email:'Sign up with Email',
+    signup_have_account:'Already have an account? ',
 
-      // Form
-      form_back: 'Back',
-      form_desc: 'Join our network by completing this form to receive service requests and quotes from local customers.',
-      form_business: 'Business Name',
-      form_contact: 'Contact Person Name',
-      form_first: 'First Name', form_last: 'Last Name',
-      form_phone: 'Phone Number',
-      form_phone_ph: '(000) 000-0000',
-      form_phone_hint: 'Please enter a valid phone number.',
-      form_phone_format: 'Format: (000) 000-0000.',
-      form_email: 'Email Address', form_email_ph: 'example@example.com',
-      form_address: 'Business Address',
-      form_street1: 'Street Address', form_street2: 'Street Address Line 2',
-      form_city: 'City', form_state: 'State / Province', form_postal: 'Postal / Zip Code',
-      form_services: 'Services You Provide',
-      form_other: 'Other',
-      form_years: 'Years of Experience', form_years_ph: 'e.g., 23',
-      form_license: 'License Number (if applicable)',
-      form_insurance: 'Insurance Status',
-      form_ins_yes: 'Insured', form_ins_no: 'Not Insured', form_ins_self: 'Self-Insured',
-      form_areas: 'Service Areas (list cities or zip codes)',
-      form_availability: 'Availability',
-      form_avail_week: 'Weekdays (Mon–Fri)', form_avail_we: 'Weekends',
-      form_avail_am: 'Mornings', form_avail_pm: 'Afternoons', form_avail_eve: 'Evenings',
-      form_notes: 'Additional notes or qualifications',
-      form_save: 'Save', form_submit: 'Submit Application',
-    }
-  };
-
-  let currentLang = 'fr';
-
-  function setLang(lang) {
-    currentLang = lang;
-    document.documentElement.lang = lang;
-    document.getElementById('btn-fr').classList.toggle('active', lang === 'fr');
-    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-    const t = translations[lang];
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const v = t[el.dataset.i18n];
-      if (v !== undefined) el.textContent = v;
-    });
-    document.querySelectorAll('[data-i18n-ph]').forEach(el => {
-      const v = t[el.dataset.i18nPh];
-      if (v !== undefined) el.placeholder = v;
-    });
+    form_back:'Back',
+    form_desc:'Join our network by completing this form to receive service requests and quotes from local customers.',
+    form_business:'Business Name',
+    form_contact:'Contact Person Name',
+    form_first:'First Name', form_last:'Last Name',
+    form_phone:'Phone Number', form_phone_ph:'(000) 000-0000',
+    form_phone_hint:'Please enter a valid phone number.',
+    form_phone_format:'Format: (000) 000-0000.',
+    form_email:'Email Address', form_email_ph:'example@example.com',
+    form_address:'Business Address',
+    form_street1:'Street Address', form_street2:'Street Address Line 2',
+    form_city:'City', form_state:'State / Province', form_postal:'Postal / Zip Code',
+    form_services:'Services You Provide', form_other:'Other',
+    form_years:'Years of Experience', form_years_ph:'e.g., 23',
+    form_license:'License Number (if applicable)',
+    form_insurance:'Insurance Status',
+    form_ins_yes:'Insured', form_ins_no:'Not Insured', form_ins_self:'Self-Insured',
+    form_areas:'Service Areas (list cities or zip codes)',
+    form_availability:'Availability',
+    form_avail_week:'Weekdays (Mon–Fri)', form_avail_we:'Weekends',
+    form_avail_am:'Mornings', form_avail_pm:'Afternoons', form_avail_eve:'Evenings',
+    form_notes:'Additional notes or qualifications',
+    form_save:'Save', form_submit:'Submit Application',
   }
+};
 
-  /* ── Routing ── */
-  const ALL_PAGES = ['home','auto','maintenance','pets','earn','contractor-form'];
+let lang = 'fr';
 
-  function showPage(name) {
-    ALL_PAGES.forEach(p => {
-      document.getElementById('page-' + p).classList.toggle('active', p === name);
-    });
-    // highlight nav for main pages only
-    ['home','auto','maintenance','pets','earn'].forEach(p => {
-      const el = document.getElementById('nav-' + p);
-      if (el) el.classList.toggle('active', p === name || (name === 'contractor-form' && p === 'earn'));
-    });
-  }
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  document.getElementById('btn-fr').classList.toggle('active', l === 'fr');
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  const t = T[l];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    if (t[el.dataset.i18n] !== undefined) el.textContent = t[el.dataset.i18n];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+    if (t[el.dataset.i18nPh] !== undefined) el.placeholder = t[el.dataset.i18nPh];
+  });
+}
 
-  /* ── Modals ── */
-  function openModal(type) {
-    document.getElementById('overlay-' + type).classList.add('active');
-  }
+const ALL = ['home','auto','maintenance','pets','earn','contractor-form'];
 
-  function bgClose(e, type) {
-    if (e.target === document.getElementById('overlay-' + type))
-      document.getElementById('overlay-' + type).classList.remove('active');
-  }
+function showPage(name) {
+  ALL.forEach(p => document.getElementById('page-' + p).classList.toggle('active', p === name));
+  ['home','auto','maintenance','pets','earn'].forEach(p => {
+    const el = document.getElementById('nav-' + p);
+    if (el) el.classList.toggle('active', p === name || (name === 'contractor-form' && p === 'earn'));
+  });
+}
 
-  function switchModal(from, to) {
-    document.getElementById('overlay-' + from).classList.remove('active');
-    document.getElementById('overlay-' + to).classList.add('active');
-  }
+function openModal(type)  { document.getElementById('overlay-' + type).classList.add('active'); }
+function bgClose(e, type) { if (e.target === document.getElementById('overlay-' + type)) document.getElementById('overlay-' + type).classList.remove('active'); }
+function switchModal(a,b) { document.getElementById('overlay-' + a).classList.remove('active'); document.getElementById('overlay-' + b).classList.add('active'); }
 
-  /* ── Init ── */
-  setLang('fr');
+setLang('fr');
 </script>
 </body>
 </html>
